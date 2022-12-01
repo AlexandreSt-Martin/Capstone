@@ -36,6 +36,8 @@ class UploadForm(FlaskForm):
 currentName = ""
 percent_accuracy = None
 display_lpResult = ""
+display_oResult = ""
+display_iResult = ""
 
 ### NOTE: All images must have the following format to loaded and read properly:  'name.jpg' ####
 
@@ -151,6 +153,16 @@ def lpPage():
         # dbQuery = None if the plate isnt in the database
         dbQuery = find_lp_owner(display_lpResult, cur)
         print(dbQuery)
+        print(type(dbQuery))
+        global display_oResult
+        global display_iResult
+        if dbQuery is None:
+            display_oResult = "Not Found"
+            display_iResult = "Not Found"
+        else:
+            display_oResult = dbQuery['Owner']
+            display_iResult = dbQuery['Info']
+
 
         # Close connection to database
         con.close()
@@ -159,7 +171,7 @@ def lpPage():
     else:
         file_url = None
     return render_template('lpPage.html', displayGpsResult=displayL(), form=form, file_url=file_url,
-                           display_lpResult=display_lpResult)
+                           display_lpResult=display_lpResult, display_oResult=display_oResult, display_iResult=display_iResult)
 
 
 @app.route('/fPage', methods=['GET', 'POST'])
