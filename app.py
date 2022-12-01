@@ -38,6 +38,7 @@ percent_accuracy = None
 display_lpResult = ""
 display_oResult = ""
 display_iResult = ""
+plate = ""
 
 ### NOTE: All images must have the following format to loaded and read properly:  'name.jpg' ####
 
@@ -59,7 +60,105 @@ for i in range(len(images)):
 process_this_frame = True
 
 
-def gen_frames(debug=False, filename=None):
+def gen_frames_lp():
+    global plate
+    camera = cv2.VideoCapture(0)
+
+    while True:
+        success, frame = camera.read()
+        if not success:
+            break
+        else:
+            try:
+                # pytesseract.pytesseract.tesseract_cmd = r'/usr/local/bin/tesseract'
+                pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+                # cascade = cv2.CascadeClassifier("haarcascade_russian_plate_number.xml")
+
+                # image = cv2.imread("img2.jpeg")
+                # image = cv2.resize(image, (735, 417))
+                frame_resized = cv2.resize(frame, (620, 480))  # image rescaling
+
+
+
+                # # convert to grey scale (black and white)
+                # gray = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2GRAY)
+                # gray = cv2.bilateralFilter(gray, 11, 17, 17)  # remove blurring
+#
+                # edged = cv2.Canny(gray, 100, 200)  # edge detection
+#
+                # binary = cv2.bitwise_not(gray)
+                # contours = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+                # contours = imutils.grab_contours(contours)
+                # contours = sorted(contours, key=cv2.contourArea, reverse=True)[:10]
+                # # cnt = contours[0]
+                # for c in contours:  # approximating contour
+                #     peri = cv2.arcLength(c, True)
+                #     # # if contour has 4 points, then we have found our screen
+                #     approx = cv2.approxPolyDP(c, 0.03 * peri, True)
+                #     if 4 <= len(approx) <= 4:
+                #         cnt = approx
+                #         break
+#
+                # mask = np.zeros(gray.shape, np.uint8)  # masking image excluding plate
+                # image_2 = cv2.drawContours(mask, contours, 0, 255, -1)
+                # # image_2 = cv2.bitwise_and(frame, frame, mask=mask)
+
+                gray = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2GRAY)  # gray image
+                noise_reduction = cv2.bilateralFilter(gray, 13, 15, 15)  # apply filters for noise reduction
+                edged = cv2.Canny(noise_reduction, 30, 200)  # detect edges
+
+                points = cv2.findContours(edged.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # approximate contours
+                contours = imutils.grab_contours(points)
+                contours = sorted(contours, key=cv2.contourArea, reverse=True)[:10]  # find top 10 contours
+
+                # loop top 10 contours to find license plate
+                cnt = None
+                for contour in contours:
+                    approx = cv2.approxPolyDP(contour, 10, True)
+                    if len(approx) == 4:
+                        cnt = approx
+                        break
+
+                mask = np.zeros(gray.shape, np.uint8)  # mask image
+                new_image = cv2.drawContours(mask, [cnt], 0, 255, -1)
+                new_image = cv2.bitwise_and(frame_resized, frame_resized, mask=mask)
+
+
+
+                (x, y) = np.where(mask == 255)
+                (topx, topy) = (np.min(x), np.min(y))
+                (bottomx, bottomy) = (np.max(x), np.max(y))
+                cropped_image = gray[topx:bottomx + 1, topy:bottomy + 1]
+
+                text = pytesseract.image_to_string(cropped_image, config='--psm 7')
+                text = text.lower()
+                text = text.replace(" ", "")
+                try:
+                    t = re.search(r"([a-z]{1,4}[0-9]{1,6})", text).group(0)
+                    t = t.replace("ontario", "", 1)
+                    t = t.replace("to", "", 1)
+                    t = t.replace("discover", "", 1)
+                    t = t.replace("mar", "", 1)
+
+                    if len(t) > 2:
+                        print("License plate number is: ", t)
+                        plate = t
+
+                except Exception as e:
+                    pass
+
+                ret, buffer = cv2.imencode('.jpg', cropped_image)
+                frame_bytes = buffer.tobytes()
+            except Exception as e:
+                print(e)
+                ret, buffer = cv2.imencode('.jpg', frame)
+                frame_bytes = buffer.tobytes()
+
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+
+def gen_frames_face(debug=False, filename=None):
     """Generates facial predictions either from camera or local files"""
     if not debug:
         camera = cv2.VideoCapture(0)
@@ -127,8 +226,11 @@ def gen_frames(debug=False, filename=None):
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-def log_person():
-    return currentName
+@app.route('/plate')
+def plate_poll():
+    global plate
+    """send current content"""
+    return plate
 
 
 @app.route('/')
@@ -138,6 +240,30 @@ def index():
 
 @app.route('/lpPage', methods=['GET', 'POST'])
 def lpPage():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+    return render_template('lpPage.html', displayName=currentName, displayAccuracy=str(percent_accuracy) + " %")
+
+
+@app.route('/fPage', methods=['GET', 'POST'])
+def fPage():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+    return render_template('fPage.html', displayName=currentName, displayAccuracy=str(percent_accuracy) + " %")
+
+
+@app.route('/lpPageFile', methods=['GET', 'POST'])
+def fPageFile():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+    return render_template('fPageFile.html', displayName=currentName, displayAccuracy=str(percent_accuracy) + " %")
+
+
+@app.route('/lpPageFile', methods=['GET', 'POST'])
+def lpPageFile():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+
     form = UploadForm()
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
@@ -163,27 +289,30 @@ def lpPage():
             display_oResult = dbQuery['Owner']
             display_iResult = dbQuery['Info']
 
-
         # Close connection to database
         con.close()
 
         print("Uploaded file: " + filename)  ## Variable 'filename' stores the name of the image selected, e.g. im4.png
     else:
         file_url = None
-    return render_template('lpPage.html', displayGpsResult=displayL(), form=form, file_url=file_url,
-                           display_lpResult=display_lpResult, display_oResult=display_oResult, display_iResult=display_iResult)
+    return render_template('lpPageFile.html',
+                           displayGpsResult=displayL(),
+                           form=form,
+                           file_url=file_url,
+                           display_lpResult=display_lpResult,
+                           display_oResult=display_oResult,
+                           display_iResult=display_iResult
+                           )
 
 
-@app.route('/fPage', methods=['GET', 'POST'])
-def fPage():
-    if request.method == 'POST':
-        return redirect(url_for('index'))
-    return render_template('fPage.html', displayName=currentName, displayAccuracy=str(percent_accuracy) + " %")
+@app.route('/video_feed_lp')
+def video_feed_face():
+    return Response(gen_frames_face(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/video_feed_face')
+def video_feed_lp():
+    return Response(gen_frames_lp(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/uploads/<filename>')
@@ -210,7 +339,7 @@ def displayLocation():
 def test1():
     """All results are unknown means very low false positives, what is good result"""
     for i in range(100):
-        gen = gen_frames(debug=True, filename="test/face_image_" + str(i) + ".jpg")
+        gen = gen_frames_face(debug=True, filename="test/face_image_" + str(i) + ".jpg")
 
         print(i)
         gen.__next__()
@@ -221,7 +350,7 @@ def test1():
 def test2():
     """Shows only recognizable faces"""
     for i in ("Ahmad", "Humza", "Leonardo", "Mohamad",):
-        gen = gen_frames(debug=True, filename="images/" + i + ".jpg")
+        gen = gen_frames_face(debug=True, filename="images/" + i + ".jpg")
 
         print(i)
         gen.__next__()

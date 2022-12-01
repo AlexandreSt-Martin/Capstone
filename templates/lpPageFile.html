@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>LP Page</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"/>
+    <noscript>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/noscript.css')}}"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="{{ url_for('index') }}">CrimaVision</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('lpPage') }}">License Plate Recognition</a></li>
+                <li><a href="{{ url_for('fPage') }}">Facial Recognition</a></li>
+                <li><a href="{{ url_for('lpPageFile') }}">License Plate Recognition File</a></li>
+                <li><a href="{{ url_for('fPageFile') }}">Facial Recognition File</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
+
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <header>
+            <div class="inner">
+                <h2>License Plate Detection</h2>
+                <input type="file" accept="image/*" name="image" id="file" style="display: none">
+                <label for="file">Upload</label>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+
+                    {% for error in form.photo.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                    <ul class="actions fit">
+                        <li><a href="#" class="button fit">{{ form.photo() }}</a></li>
+                        <li><a href="#" class="button primary">{{ form.submit(class="button primary") }}</a></li>
+                    </ul>
+                    <div>
+                        {% if file_url %}
+                        <div>
+                            <img src="{{ file_url }}" style="width: 400px;">
+                        </div>
+                        {% endif %}
+                    </div>
+                </form>
+                <div class="inner">
+                    <ul class="actions">
+                        <li><p> Detected license plate : <b>{{ display_lpResult }}</b>
+                            <br> Owner : <b>{{ display_oResult }}</b>
+                            <br> Information : <b>{{ display_iResult }}</b>
+                        </p>
+                        </li>
+
+                    </ul>
+                </div>
+                <section>
+                    <h3 class="major">GPS Location Data <i>(coming soon)</i></h3>
+                    <div class="inner">
+                        <ul class="actions">
+                            <li><p> Location : <b>{{ displayGpsResult }}</b></p></li>
+                        </ul>
+                        <form>
+                            <a href=# id=test>
+                                <button class='btn btn-default'>Test</button>
+                            </a>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </header>
+
+        <!-- Content -->
+
+
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+    </section>
+
+</div>
+
+<!-- Scripts -->
+<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/util.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+      		  $(function() {
+         		 $('a#test').on('click', function(e) {
+           			 e.preventDefault()
+           			 $.getJSON("/displayLocation",
+              		  function(data) {
+             	 //do nothing
+            });
+            return false;
+         		 });
+       			 });
+
+
+</script>
+
+
+</body>
+</html>

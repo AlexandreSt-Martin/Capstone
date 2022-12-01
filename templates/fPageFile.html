@@ -50,9 +50,10 @@
             <div class="inner">
                 <h2>Live Camera Feed</h2>
                 <!-- <h2 class="mt-5">Live Stream</h2> -->
-                <img src="{{ url_for('video_feed_lp') }}"
+                <img src="{{ url_for('video_feed_face') }}"
                      width="500"
                      height="300">
+
             </div>
         </header>
 
@@ -63,21 +64,8 @@
                     <h3 class="major">Detected Person</h3>
                     <div class="inner">
                         <ul class="actions" style="display: inline-block;">
-                            Detected plate: <span id="plate"><span>
-
-                            <script type="text/javascript">
-                            var time_span = document.getElementById("plate");
-                            function updater() {
-                                fetch('/plate')
-                                .then(response => response.text())
-                                .then(text => (time_span.innerHTML = text));  // update page with new data
-                                }
-
-                            setInterval(updater, 1000);  // run `updater()` every 1000ms (1s)
-                            </script>
-
-                            <!--<li>Individual Name :<b><p id="currName"></p></b></li>-->
-                            <!--<li>Confidence :<b><p id="displayAccuracy"></p></b></li>-->
+                            <li>Individual Name :<b><p id="currName"></p></b></li>
+                            <li>Confidence :<b><p id="displayAccuracy"></p></b></li>
                         </ul>
                     </div>
                 </section>
@@ -110,7 +98,7 @@
 				error: function(xhr) {
 					//Handel error
 				}
-				});
+				}); 
 			}, 1000);
 
 			var bar = document.getElementById("displayAccuracy");
@@ -124,9 +112,8 @@
 				error: function(xhr) {
 					//Handel error
 				}
-				});
+				}); 
 			}, 1000);
-
 
 
 

@@ -5,117 +5,88 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>FP Page</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
-		<noscript><link rel="stylesheet" href="{{url_for('static', filename='css/noscript.css')}}" /></noscript>
-	</head>
-	<body class="is-preload">
+<head>
+    <title>FP Page</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"/>
+    <noscript>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/noscript.css')}}"/>
+    </noscript>
+</head>
+<body class="is-preload">
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+<!-- Page Wrapper -->
+<div id="page-wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="{{ url_for('index') }}">CrimaVision</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="{{ url_for('index') }}">CrimaVision</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="{{ url_for('index') }}">Home</a></li>
-								<li><a href="{{ url_for('lpPage') }}">License Plate Recognition</a></li>
-								<li><a href="{{ url_for('fPage') }}">Facial Recognition</a></li>
-								<li><a href="#">Log In</a></li>
-								<li><a href="#">Sign Up</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('lpPage') }}">License Plate Recognition</a></li>
+                <li><a href="{{ url_for('fPage') }}">Facial Recognition</a></li>
+                <li><a href="{{ url_for('lpPageFile') }}">License Plate Recognition File</a></li>
+                <li><a href="{{ url_for('fPageFile') }}">Facial Recognition File</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
 
-				<!-- Wrapper -->
-					<section id="wrapper">
-						<header>
-							<div class="inner">
-								<h2>Live Camera Feed</h2>
-								<!-- <h2 class="mt-5">Live Stream</h2> -->
-                				<img src="{{ url_for('video_feed') }}"
-								width = "500"
-								height = "300">
-								
-							</div>
-						</header>
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <header>
+            <div class="inner">
+                <h2>Live Camera Feed</h2>
+                <!-- <h2 class="mt-5">Live Stream</h2> -->
+                <img src="{{ url_for('video_feed_face') }}"
+                     width="500"
+                     height="300">
 
-						<!-- Content -->
-							<div class="wrapper">
-								<div class="inner">
-									<section>
-										<h3 class="major">Detected Person</h3>
-										<div class="inner">
-											<ul class="actions" style="display: inline-block;">
-												<li>Individual Name :<b><p id = "currName"></p></b></li>
-												<li>Confidence :<b><p id = "displayAccuracy"></p></b></li>
-											</ul>
-										</div>
-									</section>
-									
-									<!-- <section>
-										<h3 class="major">Buttons</h3>
-										<ul class="actions">
-											<li><a href="#" class="button primary">Primary</a></li>
-											<li><a href="#" class="button">Default</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button large">Large</a></li>
-											<li><a href="#" class="button small">Small</a></li>
-										</ul>
-										<ul class="actions fit">
-											<li><a href="#" class="button fit">Fit</a></li>
-											<li><a href="#" class="button primary fit">Fit</a></li>
-											<li><a href="#" class="button fit">Fit</a></li>
-										</ul>
-										<ul class="actions fit small">
-											<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-											<li><a href="#" class="button fit small">Fit + Small</a></li>
-											<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-											<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-										</ul>
-										<ul class="actions">
-											<li><span class="button primary disabled">Disabled</span></li>
-											<li><span class="button disabled">Disabled</span></li>
-										</ul>
-									</section> -->
+            </div>
+        </header>
 
-									
-									
-								</div>
-							</div>
+        <!-- Content -->
+        <div class="wrapper">
+            <div class="inner">
+                <section>
+                    <h3 class="major">Detected Person</h3>
+                    <div class="inner">
+                        <ul class="actions" style="display: inline-block;">
+                            <li>Individual Name :<b><p id="currName"></p></b></li>
+                            <li>Confidence :<b><p id="displayAccuracy"></p></b></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
 
-					</section>
+    </section>
 
-				<!-- Footer -->
-					
-			</div>
+    <!-- Footer -->
 
-		<!-- Scripts -->
-			<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/util.js')}}"></script>
-			<script src="{{url_for('static', filename='js/main.js')}}"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-			<script>
+</div>
+
+<!-- Scripts -->
+<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/util.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
 			var bar = document.getElementById("currName");
 			setInterval(function(){
 				$.ajax({
@@ -143,6 +114,8 @@
 				}
 				}); 
 			}, 1000);
-			</script>
-	</body>
+
+
+</script>
+</body>
 </html>

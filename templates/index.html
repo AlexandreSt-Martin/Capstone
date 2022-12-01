@@ -5,179 +5,183 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title></title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
-		<noscript><link rel="stylesheet" href="{{url_for('static', filename='/css/noscript.css')}}" /></noscript>
-	</head>
-	<body class="is-preload">
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"/>
+    <noscript>
+        <link rel="stylesheet" href="{{url_for('static', filename='/css/noscript.css')}}"/>
+    </noscript>
+</head>
+<body class="is-preload">
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+<!-- Page Wrapper -->
+<div id="page-wrapper">
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="{{ url_for('index') }}">CrimaVision</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+    <!-- Header -->
+    <header id="header" class="alt">
+        <h1><a href="{{ url_for('index') }}">CrimaVision</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="{{ url_for('index') }}">Home</a></li>
-								<li><a href="{{ url_for('lpPage') }}">License Plate Recognition</a></li>
-								<li><a href="{{ url_for('fPage') }}">Facial Recognition</a></li>
-								<li><a href="#">Log In</a></li>
-								<li><a href="#">Sign Up</a></li>
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('lpPage') }}">License Plate Recognition</a></li>
+                <li><a href="{{ url_for('fPage') }}">Facial Recognition</a></li>
+                <li><a href="{{ url_for('lpPageFile') }}">License Plate Recognition File</a></li>
+                <li><a href="{{ url_for('fPageFile') }}">Facial Recognition File</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
 
-				<!-- Banner -->
-					<section id="banner">
-						<div class="inner">
-							<div class="logo"><span class="icon fa-gem"></span></div>
-							<h2>Our project is called CrimaVision</h2>
-							<p>A pair of smart glasses aimed towards... </p>
-						</div>
-					</section>
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <div class="logo"><span class="icon fa-gem"></span></div>
+            <h2>Our project is called CrimaVision</h2>
+            <p>A pair of smart glasses aimed towards... </p>
+        </div>
+    </section>
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+    <!-- Wrapper -->
+    <section id="wrapper">
 
-						<!-- One
-							<section id="one" class="wrapper spotlight style1">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Magna arcu feugiat</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section> -->
+        <!-- One
+            <section id="one" class="wrapper spotlight style1">
+                <div class="inner">
+                    <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">Magna arcu feugiat</h2>
+                        <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
+                        <a href="#" class="special">Learn more</a>
+                    </div>
+                </div>
+            </section> -->
 
-						<!-- Two
-							<section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Tempus adipiscing</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section> -->
+        <!-- Two
+            <section id="two" class="wrapper alt spotlight style2">
+                <div class="inner">
+                    <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">Tempus adipiscing</h2>
+                        <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
+                        <a href="#" class="special">Learn more</a>
+                    </div>
+                </div>
+            </section> -->
 
-						<!-- Three
-							<section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Nullam dignissim</h2>
-										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
-									</div>
-								</div>
-							</section> -->
+        <!-- Three
+            <section id="three" class="wrapper spotlight style3">
+                <div class="inner">
+                    <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+                    <div class="content">
+                        <h2 class="major">Nullam dignissim</h2>
+                        <p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
+                        <a href="#" class="special">Learn more</a>
+                    </div>
+                </div>
+            </section> -->
 
-						<!-- Four -->
-							<section id="four" class="wrapper alt style1">
-								<div class="inner">
-									<h2 class="major">Functionality</h2>
-									<p>We have a few functions.....</p>
-									<section class="features">
-										<article>
-											<a href="#" class="image"><img src="{{url_for('static', filename='images/pic04.jpg')}}" alt="" /></a>
-											<h3 class="major">License Plate Detection</h3>
-											<p>Live tracking License plate and displaying car information</p>
-											<a href="{{ url_for('lpPage') }}" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="{{url_for('static', filename='images/pic05.jpg')}}" alt="" /></a>
-											<h3 class="major">Facial Recognition</h3>
-											<p>Live tracking faces in view, actively detecting criminals</p>
-											<a href="{{ url_for('fPage') }}" class="special">Learn more</a>
-										</article>
-										<!-- <article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3 class="major">Ante fermentum</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<h3 class="major">Fusce consequat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
-										</article> -->
-									</section>
-									<ul class="actions">
-										<li><a href="#" class="button">Browse All</a></li>
-									</ul>
-								</div>
-							</section>
+        <!-- Four -->
+        <section id="four" class="wrapper alt style1">
+            <div class="inner">
+                <h2 class="major">Functionality</h2>
+                <p>We have a few functions.....</p>
+                <section class="features">
+                    <article>
+                        <a href="#" class="image"><img src="{{url_for('static', filename='images/pic04.jpg')}}" alt=""/></a>
+                        <h3 class="major">License Plate Detection</h3>
+                        <p>Live tracking License plate and displaying car information</p>
+                        <a href="{{ url_for('lpPage') }}" class="special">Learn more</a>
+                    </article>
+                    <article>
+                        <a href="#" class="image"><img src="{{url_for('static', filename='images/pic05.jpg')}}" alt=""/></a>
+                        <h3 class="major">Facial Recognition</h3>
+                        <p>Live tracking faces in view, actively detecting criminals</p>
+                        <a href="{{ url_for('fPage') }}" class="special">Learn more</a>
+                    </article>
+                    <article>
+                        <a href="#" class="image"><img src="{{url_for('static', filename='images/pic04.jpg')}}" alt=""/></a>
+                        <h3 class="major">License Plate Detection File</h3>
+                        <p>Live tracking License plate and displaying car information</p>
+                        <a href="{{ url_for('lpPageFile') }}" class="special">Learn more</a>
+                    </article>
+                    <article>
+                        <a href="#" class="image"><img src="{{url_for('static', filename='images/pic05.jpg')}}" alt=""/></a>
+                        <h3 class="major">Facial Recognition File</h3>
+                        <p>Live tracking faces in view, actively detecting criminals</p>
+                        <a href="{{ url_for('fPageFile') }}" class="special">Learn more</a>
+                    </article>
+                </section>
+                <ul class="actions">
+                    <li><a href="#" class="button">Browse All</a></li>
+                </ul>
+            </div>
+        </section>
 
-					</section>
+    </section>
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<!-- <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p> -->
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-							<ul class="contact">
-								<li class="icon solid fa-home">
-									Untitled Inc<br />
-									7 Glenvista drive<br />
-									Kitchener, ON 
-								</li>
-								<li class="icon solid fa-phone">(519) 722-8848</li>
-								<li class="icon solid fa-envelope"><a href="#">mohammadkhan7347@gmail.com</a></li>
-								<!-- <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li> -->
-								<!-- <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li> -->
-								<li class="icon brands fa-instagram"><a href="http://www.instagram.com/moe.khan_">instagram.com/moe.khan_</a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
+    <!-- Footer -->
+    <section id="footer">
+        <div class="inner">
+            <h2 class="major">Get in touch</h2>
+            <!-- <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p> -->
+            <form method="post" action="#">
+                <div class="fields">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name"/>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email"/>
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" rows="4"></textarea>
+                    </div>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="Send Message"/></li>
+                </ul>
+            </form>
+            <ul class="contact">
+                <li class="icon solid fa-home">
+                    Untitled Inc<br/>
+                    7 Glenvista drive<br/>
+                    Kitchener, ON
+                </li>
+                <li class="icon solid fa-phone">(519) 722-8848</li>
+                <li class="icon solid fa-envelope"><a href="#">mohammadkhan7347@gmail.com</a></li>
+                <li class="icon brands fa-instagram"><a href="http://www.instagram.com/moe.khan_">instagram.com/moe.khan_</a>
+                </li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled Inc. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </section>
 
-			</div>
+</div>
 
-		<!-- Scripts -->
-			<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
-			<script src="{{url_for('static', filename='js/util.js')}}"></script>
-			<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<!-- Scripts -->
+<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/util.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
-	</body>
+</body>
 </html>
