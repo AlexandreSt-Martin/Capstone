@@ -76,16 +76,16 @@ def gen_frames_lp():
 
                 # image = cv2.imread("img2.jpeg")
                 # image = cv2.resize(image, (735, 417))
-                frame_resized = cv2.resize(frame, (620, 480))  # image rescaling
 
-
+                # frame_resized = cv2.resize(frame, (620, 480))  # image rescaling
+                frame_resized = frame
 
                 # # convert to grey scale (black and white)
                 # gray = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2GRAY)
                 # gray = cv2.bilateralFilter(gray, 11, 17, 17)  # remove blurring
-#
+                #
                 # edged = cv2.Canny(gray, 100, 200)  # edge detection
-#
+                #
                 # binary = cv2.bitwise_not(gray)
                 # contours = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
                 # contours = imutils.grab_contours(contours)
@@ -98,7 +98,7 @@ def gen_frames_lp():
                 #     if 4 <= len(approx) <= 4:
                 #         cnt = approx
                 #         break
-#
+                #
                 # mask = np.zeros(gray.shape, np.uint8)  # masking image excluding plate
                 # image_2 = cv2.drawContours(mask, contours, 0, 255, -1)
                 # # image_2 = cv2.bitwise_and(frame, frame, mask=mask)
@@ -123,16 +123,18 @@ def gen_frames_lp():
                 new_image = cv2.drawContours(mask, [cnt], 0, 255, -1)
                 new_image = cv2.bitwise_and(frame_resized, frame_resized, mask=mask)
 
-
-
                 (x, y) = np.where(mask == 255)
                 (topx, topy) = (np.min(x), np.min(y))
                 (bottomx, bottomy) = (np.max(x), np.max(y))
                 cropped_image = gray[topx:bottomx + 1, topy:bottomy + 1]
 
                 text = pytesseract.image_to_string(cropped_image, config='--psm 7')
+                if len(text) == 0:
+                    text = pytesseract.image_to_string(gray, config='--psm 7')
+
                 text = text.lower()
                 text = text.replace(" ", "")
+                print(text)
                 try:
                     t = re.search(r"([a-z]{1,4}[0-9]{1,6})", text).group(0)
                     t = t.replace("ontario", "", 1)
@@ -146,6 +148,7 @@ def gen_frames_lp():
 
                 except Exception as e:
                     pass
+                    # print(e)
 
                 ret, buffer = cv2.imencode('.jpg', cropped_image)
                 frame_bytes = buffer.tobytes()
